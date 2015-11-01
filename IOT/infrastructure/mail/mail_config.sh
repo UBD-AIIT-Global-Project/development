@@ -1,1 +1,1 @@
-cd development/IOT/infrastructure/mailapt-get -y install postfixcp -i main.cf /etc/postfix/main.cfcp -i sasl_passwd /etc/postfix/sasl_passwd cp -i rc.local /etc/postfix/rc.localpostmap hash:/etc/postfix/sasl_passwd/etc/init.d/postfix restart
+apt-get -y install postfixcp main.cf /etc/postfix/main.cfcp sasl_passwd /etc/postfix/sasl_passwdcp rc.local /etc/postfix/rc.localpostmap hash:/etc/postfix/sasl_passwd/etc/init.d/postfix restart
