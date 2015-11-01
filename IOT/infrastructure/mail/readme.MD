@@ -1,0 +1,1 @@
+This is mail setting as well as IP address notification.Please execute below command on RaspberryPicd /home/pigit clone https://github.com/2015-GlobalPBL/developmentcd development/IOT/infrastructure/mailsh mail_config.sh
