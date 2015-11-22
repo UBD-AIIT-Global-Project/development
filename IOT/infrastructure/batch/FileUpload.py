@@ -52,18 +52,22 @@ def FileUpload(type):
   reader = csv.reader(f_Usonic)
   for row in reader:
     if cnt > int(fline):
-      total += int(row[1])
-      line_cnt += 1
+      if row[1].isdigit():
+        total += int(row[1])
+        line_cnt += 1
     cnt += 1
 
   f_Status = open(file_Status, "w")
   avg = total / line_cnt 
   f_Log.write("processed " + str(line_cnt) + "\n")
   f_Log.write("average is " + str(avg) + "\n")
-  f_Upload.write("03," + today + ctime + ",%08d\n" % avg)
+  f_Upload.write(type + "," + today + ctime + ",%08d\n" % avg)
   f_Status.write(today + "," + str(cnt) + "\n")
+  f_Upload.close()
+  f_Status.close()
 
-  cmd = "aws s3 cp " + file_Upload + " s3://enpit2015-sensors/" + type + "/" + file_Upload + " --acl public-read --profile=enpit2015 --region=us-west-2"
+  cmd = "/usr/local/bin/aws s3 cp " + file_Upload + " s3://enpit2015-sensors/" + type + "/ --profile=enpit2015 --region=us-west-2"
   import subprocess
   subprocess.call( cmd, shell=True ) 
   f_Log.write(file_Upload + " uploaded to S3\n")
+  f_Log.close()
